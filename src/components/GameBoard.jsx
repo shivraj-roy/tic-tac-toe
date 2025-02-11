@@ -6,7 +6,7 @@ const initialGameBoard = [
    [null, null, null],
 ];
 
-export default function GameBoard() {
+export default function GameBoard({onSelectCell, activePlayerSymbol}) {
    const [gameBoard, setGameBoard] = useState(initialGameBoard);
 
    function selectCellHandler(rowIndex, colIndex) {
@@ -15,9 +15,10 @@ export default function GameBoard() {
          const updatedBoard = [
             ...prevGameBoard.map((innerArray) => [...innerArray]),
          ]; // * Deep copy of the game board...
-         updatedBoard[rowIndex][colIndex] = "X";
+         updatedBoard[rowIndex][colIndex] = activePlayerSymbol;
          return updatedBoard;
       });
+      onSelectCell();
    }
    return (
       <ol id="game-board">
