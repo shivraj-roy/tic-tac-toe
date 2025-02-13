@@ -6,20 +6,27 @@ const initialGameBoard = [
    [null, null, null],
 ];
 
-export default function GameBoard({onSelectCell, activePlayerSymbol}) {
-   const [gameBoard, setGameBoard] = useState(initialGameBoard);
-
-   function selectCellHandler(rowIndex, colIndex) {
-      setGameBoard((prevGameBoard) => {
-         // * Updating state immutably, because we are not allowed to mutate the state directly...
-         const updatedBoard = [
-            ...prevGameBoard.map((innerArray) => [...innerArray]),
-         ]; // * Deep copy of the game board...
-         updatedBoard[rowIndex][colIndex] = activePlayerSymbol;
-         return updatedBoard;
-      });
-      onSelectCell();
+export default function GameBoard({onSelectCell, turns}) {
+   let gameBoard = initialGameBoard;
+   
+   for (const turn of turns) {
+      const { square, player } = turn;
+      const { row, col } = square;
+      gameBoard[row][col] = player;
    }
+   // const [gameBoard, setGameBoard] = useState(initialGameBoard);
+
+   // function selectCellHandler(rowIndex, colIndex) {
+   //    setGameBoard((prevGameBoard) => {
+   //       // * Updating state immutably, because we are not allowed to mutate the state directly...
+   //       const updatedBoard = [
+   //          ...prevGameBoard.map((innerArray) => [...innerArray]),
+   //       ]; // * Deep copy of the game board...
+   //       updatedBoard[rowIndex][colIndex] = activePlayerSymbol;
+   //       return updatedBoard;
+   //    });
+   //    onSelectCell();
+   // }
    return (
       <ol id="game-board">
          {gameBoard.map((row, rowIndex) => (
@@ -29,7 +36,7 @@ export default function GameBoard({onSelectCell, activePlayerSymbol}) {
                      <li key={cellIndex}>
                         <button
                            onClick={() =>
-                              selectCellHandler(rowIndex, cellIndex)
+                              onSelectCell(rowIndex, cellIndex)
                            }
                         >
                            {playerSymbol}
