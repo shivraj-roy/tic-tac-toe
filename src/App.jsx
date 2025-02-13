@@ -3,6 +3,7 @@ import GameBoard from "./components/GameBoard";
 import Player from "./components/Player";
 import Log from "./components/Log";
 import { WINNING_COMBINATIONS } from "./winning-combinations.js";
+import GameOver from "./components/GameOver.jsx";
 
 const initialGameBoard = [
    [null, null, null],
@@ -29,6 +30,8 @@ function App() {
       gameBoard[row][col] = player;
    }
 
+   let winner = null;
+
    for (const combinations of WINNING_COMBINATIONS) {
       const firstCellSymbol =
          gameBoard[combinations[0].row][combinations[0].column];
@@ -42,9 +45,11 @@ function App() {
          firstCellSymbol === secondCellSymbol &&
          firstCellSymbol === thirdCellSymbol
       ) {
-         console.log("Winner is ", firstCellSymbol);
+         winner = firstCellSymbol;
       }
    }
+
+   const hasDraw = gameTurns.length === 9 && !winner;
 
    function selectCellHandler(rowIndex, colIndex) {
       // setActivePlayer((prevActivePlayer) =>
@@ -74,6 +79,7 @@ function App() {
                   isActive={activePlayer === "O"}
                />
             </ol>
+            {(winner || hasDraw) && <GameOver winner={winner}/>}
             <GameBoard onSelectCell={selectCellHandler} board={gameBoard} />
          </div>
          <Log turns={gameTurns} />
