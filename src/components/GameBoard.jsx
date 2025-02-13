@@ -1,19 +1,9 @@
 import React, { useState } from "react";
 
-const initialGameBoard = [
-   [null, null, null],
-   [null, null, null],
-   [null, null, null],
-];
 
-export default function GameBoard({onSelectCell, turns}) {
-   let gameBoard = initialGameBoard;
+
+export default function GameBoard({onSelectCell, board}) {
    
-   for (const turn of turns) {
-      const { square, player } = turn;
-      const { row, col } = square;
-      gameBoard[row][col] = player;
-   }
    // const [gameBoard, setGameBoard] = useState(initialGameBoard);
 
    // function selectCellHandler(rowIndex, colIndex) {
@@ -29,7 +19,7 @@ export default function GameBoard({onSelectCell, turns}) {
    // }
    return (
       <ol id="game-board">
-         {gameBoard.map((row, rowIndex) => (
+         {board.map((row, rowIndex) => (
             <li key={rowIndex}>
                <ol>
                   {row.map((playerSymbol, cellIndex) => (
