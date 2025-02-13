@@ -19,6 +19,10 @@ function deriveActivePlayer(gameTurns) {
    return currentPlayer;
 }
 function App() {
+   const [players, setPlayers] = useState({
+      X: 'Player 1',
+      Y: 'Player 2'
+   })
    const [gameTurns, setGameTurns] = useState([]);
    // const [activePlayer, setActivePlayer] = useState("X");
    const activePlayer = deriveActivePlayer(gameTurns);
@@ -45,7 +49,7 @@ function App() {
          firstCellSymbol === secondCellSymbol &&
          firstCellSymbol === thirdCellSymbol
       ) {
-         winner = firstCellSymbol;
+         winner = players[firstCellSymbol];
       }
    }
 
@@ -69,6 +73,14 @@ function App() {
       setGameTurns([]);
    }
 
+   function changePlayerNameHandler(symbol, name) {
+      setPlayers((prevPlayers) => {
+         return {
+            ...prevPlayers,
+            [symbol]: name
+         }});
+   }
+
    return (
       <main>
          <div id="game-container">
@@ -77,11 +89,13 @@ function App() {
                   initialName="Player 1"
                   symbol="X"
                   isActive={activePlayer === "X"}
+                  onChangeName={changePlayerNameHandler}
                />
                <Player
                   initialName="Player 2"
                   symbol="O"
                   isActive={activePlayer === "O"}
+                  onChangeName={changePlayerNameHandler}
                />
             </ol>
             {(winner || hasDraw) && <GameOver winner={winner} onRestart={restartHandler}/>}

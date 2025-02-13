@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function Player({ initialName, symbol, isActive }) {
+export default function Player({ initialName, symbol, isActive, onChangeName}) {
    const [playerName, setPlayerName] = useState(initialName); // This is used to store the player name...
    const [isEditing, setIsEditing] = useState(false);
 
@@ -11,6 +11,9 @@ export default function Player({ initialName, symbol, isActive }) {
    const editHandler = () => {
       // setIsEditing(!isEditing); // * doesn't gurantee the latest state...
       setIsEditing((prevState) => !prevState); // * Gurantee the latest state, react ensures the latest state...
+      if (isEditing) {
+         onChangeName(symbol, playerName);
+      }
    };
 
    return (
