@@ -1,12 +1,50 @@
-# TIC-TAC-TOE
+# Tic-Tac-Toe
 
-<h2>Tic-Tac-Toe is a simple yet strategic two-player game played on a 3×3 grid. The players take turns marking a space with their respective symbol—“X” or “O”—with the goal of forming a horizontal, vertical, or diagonal line of three matching symbols.</h2>
+This is a simple Tic-Tac-Toe game built with React.
 
-<h3>Game Rules: </h3>
-<ol>
-<li>The game is played in 3x3 grid.</li>
-<li>Player 1 uses 'X' & Player 2 uses 'O'.</li>
-<li>Players take turns placing their mark in an empty square.</li>
-<li>The first player to get three in a row (horizontally, vertically, or diagonally) wins.</li>
-<li>If all 9 squares are filled and no player has three in a row, the game ends in a draw.</li>
-</ol>
+## Getting Started
+
+### Prerequisites
+
+Make sure you have Node.js and npm installed on your machine.
+
+### Installation
+
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/shivraj-roy/tic-tac-toe.git
+   ```
+2. Navigate to the project directory:
+   ```sh
+   cd tic-tac-toe
+   ```
+3. Install the dependencies:
+   ```sh
+   npm install
+   ```
+
+### Running the Game
+
+To start the development server, run:
+
+```sh
+npm run dev
+```
+
+Open your browser and go to `http://localhost:5173` to play the game.
+
+## Project Structure
+
+-  `src/components/GameBoard.jsx`: The main game board component.
+-  `src/components/Log.jsx`: The component that logs the moves made by players.
+
+## How to Play
+
+-  The game is played on a 3x3 grid.
+-  Two players take turns to mark a cell with their symbol (X or O).
+-  The first player to get three of their symbols in a row (horizontally, vertically, or diagonally) wins the game.
+-  If all cells are filled and no player has three in a row, the game is a draw.
+
+## License
+
+This project is licensed under the MIT License.
